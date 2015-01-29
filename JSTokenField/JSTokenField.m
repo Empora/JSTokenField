@@ -25,7 +25,7 @@
 //	authors and should not be interpreted as representing official policies, either expressed
 //	or implied, of James Addyman (JamSoft).
 //
-//	Forked by Neil Coxhead
+//	Forked by Neil Coxhead 29.01.2015
 //
 
 #import "JSTokenField.h"
