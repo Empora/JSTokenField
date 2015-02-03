@@ -249,7 +249,13 @@ NSString *const JSDeletedTokenKey = @"JSDeletedTokenKey";
 			  action:@selector(toggle:)
 	forControlEvents:UIControlEventTouchUpInside];
 	
+	[self applyButtonStyle:token];
+	
 	return token;
+}
+
+- (void) applyButtonStyle:(JSTokenButton*) button{
+	
 }
 
 - (void)layoutSubviews

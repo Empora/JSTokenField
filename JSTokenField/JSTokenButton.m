@@ -111,10 +111,12 @@
 }
 
 - (BOOL)hasText {
-    return NO;
+    return YES;
 }
 - (void)insertText:(NSString *)text {
-    return;
+    [_parentField removeTokenForString:[self titleForState:UIControlStateNormal]];
+    [_parentField.textField becomeFirstResponder];
+    [_parentField.textField insertText:text];
 }
 
 
