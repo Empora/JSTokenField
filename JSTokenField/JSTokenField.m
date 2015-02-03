@@ -147,12 +147,23 @@ NSString *const JSDeletedTokenKey = @"JSDeletedTokenKey";
     JSTokenButton *tokenToRemove = nil;
     for (JSTokenButton *token in [self.tokens reverseObjectEnumerator]) {
         if (test(token)) {
-            tokenToRemove = token;
-            break;
+            // first ask if it should be deleted
+            NSString *tokenName = [token titleForState:UIControlStateNormal];
+            BOOL shouldRemove = YES;
+            if ([self.delegate respondsToSelector:@selector(tokenField:shouldRemoveToken:representedObject:)]) {
+                shouldRemove = [self.delegate tokenField:self
+                                            shouldRemoveToken:tokenName
+                                            representedObject:self.deletedToken.representedObject];
+            }
+            if (shouldRemove) {
+                tokenToRemove = token;
+                break;
+            }
         }
     }
     
     if (tokenToRemove) {
+
         if (tokenToRemove.isFirstResponder) {
             [self.textField becomeFirstResponder];
         }
