@@ -1,6 +1,6 @@
    Pod::Spec.new do |s|
   s.name     = 'JSTokenField'
-  s.version  = '1.0'
+  s.version  = '1.1'
   s.source   = { :git => 'https://github.com/empora/JSTokenField.git'}
   s.source_files = 'JSTokenField/JS*.{h,m}'
   s.resources    = 'JSTokenField/*.png'

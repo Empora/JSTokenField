@@ -61,6 +61,7 @@
 		B71650D0144399F800EBF2C7 /* libJSTokenFieldLibrary.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJSTokenFieldLibrary.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7A8303516D2D21500E7587F /* JSBackspaceReportingTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSBackspaceReportingTextField.h; sourceTree = "<group>"; };
 		B7A8303616D2D21500E7587F /* JSBackspaceReportingTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSBackspaceReportingTextField.m; sourceTree = "<group>"; };
+		E1CE5A9D1A8191050057B5EC /* JSTokenField.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = JSTokenField.podspec; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +91,7 @@
 		1A1A068B13FEDEEC00CA6645 = {
 			isa = PBXGroup;
 			children = (
+				E1CE5A9D1A8191050057B5EC /* JSTokenField.podspec */,
 				751112581A39F76C003EC6C8 /* Default-568h@2x.png */,
 				1A1A06A013FEDEEC00CA6645 /* JSTokenField */,
 				1A1A069913FEDEEC00CA6645 /* Frameworks */,
