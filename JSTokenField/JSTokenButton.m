@@ -79,6 +79,8 @@
 		[self setBackgroundImage:self.normalBg forState:UIControlStateNormal];
 		[self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 	}
+    
+    [self.parentField token:self highlighted:toggled];
 }
 
 - (BOOL)becomeFirstResponder {

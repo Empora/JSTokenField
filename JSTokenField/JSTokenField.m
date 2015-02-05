@@ -295,6 +295,20 @@ NSString *const JSDeletedTokenKey = @"JSDeletedTokenKey";
 	[button sizeToFit];
 }
 
+- (void) token:(JSTokenButton*) token highlighted:(BOOL) highlighted{
+	if (highlighted) {
+		if ([self.delegate respondsToSelector:@selector(tokenField:didHighlightToken:representedObject:)]) {
+			[self.delegate tokenField:self didHighlightToken:[token titleForState:UIControlStateNormal] representedObject:token.representedObject];
+		}
+	} else {
+		if ([self.delegate respondsToSelector:@selector(tokenField:didUnhighlightToken:representedObject:)]) {
+			[self.delegate tokenField:self didUnhighlightToken:[token titleForState:UIControlStateNormal] representedObject:token.representedObject];
+		}
+
+	}
+	
+}
+
 - (void)layoutSubviews
 {
 	CGRect currentRect = CGRectZero;

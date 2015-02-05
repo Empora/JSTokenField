@@ -57,6 +57,8 @@ extern NSString *const JSDeletedTokenKey;
 - (void) applyButtonStyle:(JSTokenButton*) button;
 - (void) applyDeleteButtonStyle:(UIButton*) button;
 
+- (void) token:(JSTokenButton*) token highlighted:(BOOL) highlighted;
+
 @end
 
 @protocol JSTokenFieldDelegate <NSObject>
@@ -66,6 +68,8 @@ extern NSString *const JSDeletedTokenKey;
 - (void)tokenField:(JSTokenField *)tokenField didAddToken:(NSString *)title representedObject:(id)obj;
 - (void)tokenField:(JSTokenField *)tokenField didRemoveToken:(NSString *)title representedObject:(id)obj;
 - (BOOL)tokenField:(JSTokenField *)tokenField shouldRemoveToken:(NSString *)title representedObject:(id)obj;
+- (void) tokenField:(JSTokenField *)tokenField didHighlightToken:(NSString *)title representedObject:(id)obj;
+- (void) tokenField:(JSTokenField *)tokenField didUnhighlightToken:(NSString *)title representedObject:(id)obj;
 
 - (void)tokenFieldTextDidChange:(JSTokenField *)tokenField;
 
