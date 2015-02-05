@@ -55,6 +55,7 @@ extern NSString *const JSDeletedTokenKey;
 - (void)removeAllTokens;
 
 - (void) applyButtonStyle:(JSTokenButton*) button;
+- (void) applyDeleteButtonStyle:(UIButton*) button;
 
 @end
 
