@@ -318,6 +318,7 @@ NSString *const JSDeletedTokenKey = @"JSDeletedTokenKey";
 			[lastLineTokens removeAllObjects];
 			currentRect.origin = CGPointMake(self.insets.left, (currentRect.origin.y + frame.size.height + self.insets.top));
 		}
+		CGFloat tokenDeleteButtonWidth = frame.size.height;
 		
 		frame.origin.x = currentRect.origin.x;
 		frame.origin.y = currentRect.origin.y + self.insets.top;
@@ -332,7 +333,7 @@ NSString *const JSDeletedTokenKey = @"JSDeletedTokenKey";
 		
 		currentRect.origin.x += frame.size.width;
 		
-		CGFloat tokenDeleteButtonWidth = 0.0;
+
 		if (self.showDeleteButtons) {
 			UIButton* tokenDeleteButton = self.tokenDeleteButtons[[token titleForState:UIControlStateNormal]];
 			tokenDeleteButtonWidth = tokenDeleteButton.frame.size.width;
@@ -340,10 +341,7 @@ NSString *const JSDeletedTokenKey = @"JSDeletedTokenKey";
 			{
 				[self addSubview:tokenDeleteButton];
 			}
-			CGRect tokenDeleteButtonFrame = tokenDeleteButton.frame;
-			tokenDeleteButtonFrame.origin.y = frame.origin.y;
-			tokenDeleteButtonFrame.origin.x = currentRect.origin.x;
-			tokenDeleteButton.frame = tokenDeleteButtonFrame;
+			tokenDeleteButton.frame = CGRectMake(currentRect.origin.x, frame.origin.y, tokenDeleteButtonWidth, tokenDeleteButtonWidth);
 		}
 		
 		currentRect.origin.x += tokenDeleteButtonWidth + self.tokenSpacing;
