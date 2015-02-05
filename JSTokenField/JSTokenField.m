@@ -350,7 +350,6 @@ NSString *const JSDeletedTokenKey = @"JSDeletedTokenKey";
 
 		if (self.showDeleteButtons) {
 			UIButton* tokenDeleteButton = self.tokenDeleteButtons[[token titleForState:UIControlStateNormal]];
-			tokenDeleteButtonWidth = tokenDeleteButton.frame.size.width;
 			if (![tokenDeleteButton superview])
 			{
 				[self addSubview:tokenDeleteButton];
