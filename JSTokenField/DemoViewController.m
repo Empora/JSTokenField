@@ -45,6 +45,7 @@
 	self.toRecipients = [[NSMutableArray alloc] init];
 	
 	self.toField = [[JSTokenField alloc] initWithFrame:CGRectMake(0, 0, 320, 31)];
+    self.toField.showDeleteButtons = YES;
 	[[self.toField label] setText:@"To:"];
 	[self.toField setDelegate:self];
 	[self.view addSubview:self.toField];

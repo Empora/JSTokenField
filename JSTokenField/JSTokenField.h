@@ -1,9 +1,9 @@
 //
 //	Copyright 2011 James Addyman (JamSoft). All rights reserved.
-//	
+//
 //	Redistribution and use in source and binary forms, with or without modification, are
 //	permitted provided that the following conditions are met:
-//	
+//
 //		1. Redistributions of source code must retain the above copyright notice, this list of
 //			conditions and the following disclaimer.
 //
@@ -38,6 +38,10 @@ extern NSString *const JSTokenFieldOldFrameKey;
 extern NSString *const JSDeletedTokenKey;
 
 @interface JSTokenField : UIView <UITextFieldDelegate>
+
+@property (nonatomic, assign) UIEdgeInsets insets;
+@property (nonatomic, assign) CGFloat tokenSpacing;
+@property (nonatomic, assign) BOOL showDeleteButtons;
 
 @property (nonatomic, readonly) JSBackspaceReportingTextField *textField;
 @property (nonatomic, readonly) UILabel *label;

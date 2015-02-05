@@ -10,4 +10,6 @@
 
 @interface JSBackspaceReportingTextField : UITextField
 
+@property (nonatomic, assign) UIEdgeInsets insets;
+
 @end

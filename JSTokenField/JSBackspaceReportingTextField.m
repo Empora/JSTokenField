@@ -26,4 +26,17 @@
     return YES;
 }
 
+- (CGRect) rightViewRectForBounds:(CGRect)bounds{
+    CGRect textRect = [super rightViewRectForBounds:bounds];
+    textRect.origin.x -= self.insets.right;
+    return textRect;
+}
+
+- (CGRect) leftViewRectForBounds:(CGRect)bounds{
+    CGRect textRect = [super leftViewRectForBounds:bounds];
+    textRect.origin.x += self.insets.left;
+    return textRect;
+}
+
+
 @end
