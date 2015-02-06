@@ -34,6 +34,8 @@
 @property (nonatomic, getter=isToggled) BOOL toggled;
 @property (nonatomic, strong) UIImage *normalBg;
 @property (nonatomic, strong) UIImage *highlightedBg;
+@property (nonatomic, strong) UIColor *normalTitleColor;
+@property (nonatomic, strong) UIColor *highlightedTitleColor;
 @property (nonatomic, readonly) id representedObject;
 @property (nonatomic, readonly) JSTokenField *parentField;
 

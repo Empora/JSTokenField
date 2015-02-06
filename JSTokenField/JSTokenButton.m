@@ -44,6 +44,9 @@
     JSTokenButton *button = (JSTokenButton *)[self buttonWithType:UIButtonTypeCustom];
     [button setNormalBg:[[UIImage imageNamed:@"tokenNormal.png"] stretchableImageWithLeftCapWidth:14 topCapHeight:0]];
     [button setHighlightedBg:[[UIImage imageNamed:@"tokenHighlighted.png"] stretchableImageWithLeftCapWidth:14 topCapHeight:0]];
+    button.normalTitleColor = [UIColor darkGrayColor];
+    button.highlightedTitleColor = [UIColor whiteColor];
+    
     [button setAdjustsImageWhenHighlighted:NO];
     [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [[button titleLabel] setFont:[UIFont fontWithName:@"Helvetica Neue" size:15]];
@@ -84,12 +87,12 @@
     if (_toggled)
     {
         [self setBackgroundImage:self.highlightedBg forState:UIControlStateNormal];
-        [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self setTitleColor:self.highlightedTitleColor forState:UIControlStateNormal];
     }
     else
     {
         [self setBackgroundImage:self.normalBg forState:UIControlStateNormal];
-        [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [self setTitleColor:self.highlightedTitleColor forState:UIControlStateNormal];
     }
 }
 
