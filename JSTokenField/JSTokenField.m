@@ -196,7 +196,7 @@ NSString *const JSDeletedTokenKey = @"JSDeletedTokenKey";
 		[tokenToRemove removeFromSuperview];
 		
 		[self.tokens removeObject:tokenToRemove];
-
+		
 		if (self.tokenDeleteButtons[[tokenToRemove titleForState:UIControlStateNormal]]) {
 			[self.tokenDeleteButtons[[tokenToRemove titleForState:UIControlStateNormal]] removeFromSuperview];
 			[self.tokenDeleteButtons removeObjectForKey:[tokenToRemove titleForState:UIControlStateNormal]];
@@ -304,7 +304,7 @@ NSString *const JSDeletedTokenKey = @"JSDeletedTokenKey";
 		if ([self.delegate respondsToSelector:@selector(tokenField:didUnhighlightToken:representedObject:)]) {
 			[self.delegate tokenField:self didUnhighlightToken:[token titleForState:UIControlStateNormal] representedObject:token.representedObject];
 		}
-
+		
 	}
 	
 }
@@ -347,14 +347,14 @@ NSString *const JSDeletedTokenKey = @"JSDeletedTokenKey";
 		
 		currentRect.origin.x += frame.size.width;
 		
-
+		
 		if (self.showDeleteButtons) {
 			UIButton* tokenDeleteButton = self.tokenDeleteButtons[[token titleForState:UIControlStateNormal]];
 			if (![tokenDeleteButton superview])
 			{
 				[self addSubview:tokenDeleteButton];
 			}
-			tokenDeleteButton.frame = CGRectMake(currentRect.origin.x, frame.origin.y, tokenDeleteButtonWidth, tokenDeleteButtonWidth);
+			tokenDeleteButton.frame = CGRectMake(currentRect.origin.x, (self.bounds.size.height-tokenDeleteButtonWidth)/2.0, tokenDeleteButtonWidth, tokenDeleteButtonWidth);
 		}
 		
 		currentRect.origin.x += tokenDeleteButtonWidth + self.tokenSpacing;

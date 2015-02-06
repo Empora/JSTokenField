@@ -1,9 +1,9 @@
 //
 //	Copyright 2011 James Addyman (JamSoft). All rights reserved.
-//	
+//
 //	Redistribution and use in source and binary forms, with or without modification, are
 //	permitted provided that the following conditions are met:
-//	
+//
 //		1. Redistributions of source code must retain the above copyright notice, this list of
 //			conditions and the following disclaimer.
 //
@@ -41,44 +41,63 @@
 
 + (JSTokenButton *)tokenWithString:(NSString *)string representedObject:(id)obj parentField:(JSTokenField *)parentField
 {
-	JSTokenButton *button = (JSTokenButton *)[self buttonWithType:UIButtonTypeCustom];
-	[button setNormalBg:[[UIImage imageNamed:@"tokenNormal.png"] stretchableImageWithLeftCapWidth:14 topCapHeight:0]];
-	[button setHighlightedBg:[[UIImage imageNamed:@"tokenHighlighted.png"] stretchableImageWithLeftCapWidth:14 topCapHeight:0]];
-	[button setAdjustsImageWhenHighlighted:NO];
-	[button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-	[[button titleLabel] setFont:[UIFont fontWithName:@"Helvetica Neue" size:15]];
-	[[button titleLabel] setLineBreakMode:NSLineBreakByTruncatingTail];
-	[button setTitleEdgeInsets:UIEdgeInsetsMake(2, 10, 0, 10)];
-	
-	[button setTitle:string forState:UIControlStateNormal];
-	
-	[button sizeToFit];
-	CGRect frame = [button frame];
-	frame.size.width += 20;
-	frame.size.height = 25;
-	[button setFrame:frame];
-	
-	[button setToggled:NO];
-	[button setRepresentedObject:obj];
+    JSTokenButton *button = (JSTokenButton *)[self buttonWithType:UIButtonTypeCustom];
+    [button setNormalBg:[[UIImage imageNamed:@"tokenNormal.png"] stretchableImageWithLeftCapWidth:14 topCapHeight:0]];
+    [button setHighlightedBg:[[UIImage imageNamed:@"tokenHighlighted.png"] stretchableImageWithLeftCapWidth:14 topCapHeight:0]];
+    [button setAdjustsImageWhenHighlighted:NO];
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [[button titleLabel] setFont:[UIFont fontWithName:@"Helvetica Neue" size:15]];
+    [[button titleLabel] setLineBreakMode:NSLineBreakByTruncatingTail];
+    [button setTitleEdgeInsets:UIEdgeInsetsMake(2, 10, 0, 10)];
+    
+    [button setTitle:string forState:UIControlStateNormal];
+    
+    [button sizeToFit];
+    CGRect frame = [button frame];
+    frame.size.width += 20;
+    frame.size.height = 25;
+    [button setFrame:frame];
+    
+    [button setToggled:NO];
+    [button setRepresentedObject:obj];
     [button setParentField:parentField];
-	
-	return button;
+    
+    return button;
+}
+
+
+- (void) setNormalBg:(UIImage *)normalBg{
+    if(_normalBg != normalBg){
+        _normalBg = normalBg;
+        [self updateImages];
+    }
+}
+
+- (void) setHighlightedBg:(UIImage *)highlightedBg{
+    if (_highlightedBg != highlightedBg) {
+        _highlightedBg = highlightedBg;
+        [self updateImages];
+    }
+}
+
+- (void) updateImages{
+    if (_toggled)
+    {
+        [self setBackgroundImage:self.highlightedBg forState:UIControlStateNormal];
+        [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    }
+    else
+    {
+        [self setBackgroundImage:self.normalBg forState:UIControlStateNormal];
+        [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    }
 }
 
 - (void)setToggled:(BOOL)toggled
 {
-	_toggled = toggled;
-	
-	if (_toggled)
-	{
-		[self setBackgroundImage:self.highlightedBg forState:UIControlStateNormal];
-		[self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-	}
-	else
-	{
-		[self setBackgroundImage:self.normalBg forState:UIControlStateNormal];
-		[self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-	}
+    _toggled = toggled;
+    
+    [self updateImages];
     
     [self.parentField token:self highlighted:toggled];
 }
