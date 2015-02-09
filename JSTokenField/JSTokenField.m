@@ -332,11 +332,11 @@ NSString *const JSDeletedTokenKey = @"JSDeletedTokenKey";
 			[lastLineTokens removeAllObjects];
 			currentRect.origin = CGPointMake(self.insets.left, (currentRect.origin.y + frame.size.height + self.insets.top));
 		}
-		CGFloat tokenDeleteButtonWidth = frame.size.height;
 		
 		frame.origin.x = currentRect.origin.x;
 		frame.origin.y = currentRect.origin.y + self.insets.top;
 		frame.size.height = self.bounds.size.height - (self.insets.top + self.insets.bottom);
+		CGFloat tokenDeleteButtonWidth = frame.size.height;
 		
 		[token setFrame:frame];
 		
