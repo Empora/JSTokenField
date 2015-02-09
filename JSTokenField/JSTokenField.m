@@ -336,6 +336,7 @@ NSString *const JSDeletedTokenKey = @"JSDeletedTokenKey";
 		
 		frame.origin.x = currentRect.origin.x;
 		frame.origin.y = currentRect.origin.y + self.insets.top;
+		frame.size.height = self.bounds.size.height - (self.insets.top + self.insets.bottom);
 		
 		[token setFrame:frame];
 		
