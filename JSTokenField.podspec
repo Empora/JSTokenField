@@ -1,5 +1,5 @@
 #
-#  Be sure to run `pod spec lint FFXCollectionViewMasonryLayout.podspec' to ensure this is a
+#  Be sure to run `pod spec lint JSTokenField.podspec' to ensure this is a
 #  valid spec and to remove all comments including this before submitting the spec.
 #
 #  To learn more about Podspec attributes see http://docs.cocoapods.org/specification.html
@@ -15,19 +15,20 @@ Pod::Spec.new do |s|
   #  summary should be tweet-length, and the description more in depth.
   #
 
-  s.name         = “JSTokenField”
-  s.version      = “1.2”
-  s.summary      = "JSTokenField"
+  s.name         = "JSTokenField"
+  s.version      = "1.2"
+  s.summary      = "A short description of JSTokenField."
 
   s.description  = <<-DESC
-                   A longer description of FFXCollectionViewMasonryLayout in Markdown format.
+                   A longer description of JSTokenField in Markdown format.
+
                    * Think: Why did you write this? What is the focus? What does it do?
                    * CocoaPods will be using this to generate tags, and improve search results.
                    * Try to keep it short, snappy and to the point.
                    * Finally, don't worry about the indent, CocoaPods strips it!
                    DESC
 
-  s.homepage     = "https://github.com/Empora/JSTokenField"
+s.homepage     = "https://github.com/Empora/JSTokenField"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
 
@@ -38,7 +39,6 @@ Pod::Spec.new do |s|
   #  Popular ones are 'MIT', 'BSD' and 'Apache License, Version 2.0'.
   #
 
-  #s.license      = "MIT (example)"
   s.license      = { :type => "MIT", :file => "LICENSE.txt" }
 
 
@@ -52,12 +52,12 @@ Pod::Spec.new do |s|
   #  profile URL.
   #
 
-  # s.author             = { "Empora Group GmbH" => "" }
-  # Or just: s.author    = "Empora Group GmbH"
-  # s.authors            = { "Empora Group GmbH" => "" }
-  # s.social_media_url   = "http://twitter.com/Empora Group GmbH"
-  s.homepage = 'https://github.com/jasarien/JSTokenField'
-  s.authors = {'James Addyman' => ''}
+s.homepage = 'https://github.com/jasarien/JSTokenField'
+s.authors = {'James Addyman' => ''}
+  s.author             = { "Neil Coxhead" => "neil.coxhead@empora.com" }
+  # Or just: s.author    = "Neil Coxhead"
+  # s.authors            = { "Neil Coxhead" => "neil.coxhead@empora.com" }
+  # s.social_media_url   = "http://twitter.com/Neil Coxhead"
 
   # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
@@ -65,8 +65,7 @@ Pod::Spec.new do |s|
   #  the deployment target. You can optionally include the target after the platform.
   #
 
-  #s.platform     = :ios
-  s.platform     = :ios, "7.0"
+s.platform     = :ios, "7.0"
 
   #  When using multiple platforms
   # s.ios.deployment_target = "5.0"
@@ -78,8 +77,9 @@ Pod::Spec.new do |s|
   #  Specify the location from where the source should be retrieved.
   #  Supports git, hg, bzr, svn and HTTP.
   #
+s.source       = { :git => "https://github.com/Empora/JSTokenField.git",:tag => s.version.to_s}
 
-  s.source       = { :git => "https://github.com/Empora/JSTokenField.git",:tag => s.version.to_s}
+
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -104,7 +104,7 @@ s.source_files  = "JSTokenField/JSTokenField.{h,m}","JSTokenField/JSBackspaceRep
   #
 
   # s.resource  = "icon.png"
-  s.resources = "JSTokenField/*.png"
+s.resources = "JSTokenField/*.png"
 
   # s.preserve_paths = "FilesToSave", "MoreFilesToSave"
 
@@ -115,7 +115,8 @@ s.source_files  = "JSTokenField/JSTokenField.{h,m}","JSTokenField/JSBackspaceRep
   #  the lib prefix of their name.
   #
 
-  s.framework  = "UIKit"
+s.framework  = "UIKit"
+
   # s.frameworks = "SomeFramework", "AnotherFramework"
 
   # s.library   = "iconv"
@@ -132,3 +133,5 @@ s.source_files  = "JSTokenField/JSTokenField.{h,m}","JSTokenField/JSBackspaceRep
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
   # s.dependency "JSONKit", "~> 1.4"
+
+end
