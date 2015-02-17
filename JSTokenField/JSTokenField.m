@@ -381,6 +381,8 @@ NSString *const JSDeletedTokenKey = @"JSDeletedTokenKey";
 	CGRect textFieldFrame = [self.textField frame];
 	
 	textFieldFrame.origin = currentRect.origin;
+    
+    CGRect scrollToRect = CGRectZero;
 	
 	if ((self.frame.size.width - textFieldFrame.origin.x) >= 60)
 	{
@@ -391,10 +393,9 @@ NSString *const JSDeletedTokenKey = @"JSDeletedTokenKey";
         if (self.isScrollableHorizontally) {
             self.scrollView.scrollEnabled =  YES;
             self.scrollView.showsHorizontalScrollIndicator = YES;
-//            CGRect scrollToRect = CGRectMake(textFieldFrame.origin.x + textFieldFrame.size.width,textFieldFrame.origin.y, textFieldFrame.size.width + WIDTH_PADDING, textFieldFrame.size.height);
-//            [self.scrollView scrollRectToVisible:scrollToRect animated:YES];
-            CGPoint scrollTo = CGPointMake( textFieldFrame.origin.x + textFieldFrame.size.width + WIDTH_PADDING - self.frame.size.width, 0);
-            self.scrollView.contentOffset = scrollTo;
+            scrollToRect = CGRectMake(textFieldFrame.origin.x + textFieldFrame.size.width,textFieldFrame.origin.y, textFieldFrame.size.width + WIDTH_PADDING, textFieldFrame.size.height);
+//            CGPoint scrollTo = CGPointMake( textFieldFrame.origin.x + textFieldFrame.size.width + WIDTH_PADDING - self.frame.size.width, 0);
+//            self.scrollView.contentOffset = scrollTo;
         } else {
             [lastLineTokens removeAllObjects];
             textFieldFrame.size.width = self.frame.size.width;
@@ -455,6 +456,11 @@ NSString *const JSDeletedTokenKey = @"JSDeletedTokenKey";
                              }
                          }
                          completion:nil];
+    }
+    
+    // if content has become larger scroll to new end position
+    if (scrollToRect.size.width != 0) {
+        [self.scrollView scrollRectToVisible:scrollToRect animated:YES];
     }
 }
 
