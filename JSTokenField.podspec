@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
   s.summary      = "Text field with tokenised keywords"
   s.description  = "idghsfdhsgfhjdsfhdsgfkdhjsbgdfhjkghvdghvjdfhjkvdhjv"
   s.homepage     = "https://github.com/Empora/JSTokenField"
-  s.license      = { :type => "MIT" }
+  s.license      = { :type => "MIT", :file => "LICENCE.txt" }
   s.homepage     = "https://github.com/jasarien/JSTokenField"
   s.authors      = {"James Addyman"=> ""}
   s.platform     = :ios, "7.0"
