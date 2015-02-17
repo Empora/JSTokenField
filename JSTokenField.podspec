@@ -12,15 +12,7 @@ Pod::Spec.new do |s|
   s.name         = "JSTokenField"
   s.version      = "1.2"
   s.summary      = "Text field with tokenised keywords"
-  s.description  = <<-DESC
-                   A longer description of JSTokenField in Markdown format.
-
-                   * Think: Why did you write this? What is the focus? What does it do?
-                   * CocoaPods will be using this to generate tags, and improve search results.
-                   * Try to keep it short, snappy and to the point.
-                   * Finally, don't worry about the indent, CocoaPods strips it!
-                   DESC
-
+  s.description  = "idghsfdhsgfhjdsfhdsgfkdhjsbgdfhjkghvdghvjdfhjkvdhjv"
   s.homepage     = "https://github.com/Empora/JSTokenField"
   s.license      = { :type => "MIT", :file => "LICENSE.txt" }
   s.homepage     = "https://github.com/jasarien/JSTokenField"
