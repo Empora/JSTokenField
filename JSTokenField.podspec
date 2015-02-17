@@ -28,7 +28,7 @@ Pod::Spec.new do |s|
                    * Finally, don't worry about the indent, CocoaPods strips it!
                    DESC
 
-s.homepage     = "https://github.com/Empora/JSTokenField"
+  s.homepage     = "https://github.com/Empora/JSTokenField"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
 
@@ -52,8 +52,8 @@ s.homepage     = "https://github.com/Empora/JSTokenField"
   #  profile URL.
   #
 
-s.homepage = 'https://github.com/jasarien/JSTokenField'
-s.authors = {'James Addyman' => ''}
+  s.homepage = 'https://github.com/jasarien/JSTokenField'
+  s.authors = {'James Addyman' => ''}
   s.author             = { "Neil Coxhead" => "neil.coxhead@empora.com" }
   # Or just: s.author    = "Neil Coxhead"
   # s.authors            = { "Neil Coxhead" => "neil.coxhead@empora.com" }
@@ -65,7 +65,7 @@ s.authors = {'James Addyman' => ''}
   #  the deployment target. You can optionally include the target after the platform.
   #
 
-s.platform     = :ios, "7.0"
+  s.platform     = :ios, "7.0"
 
   #  When using multiple platforms
   # s.ios.deployment_target = "5.0"
@@ -77,7 +77,7 @@ s.platform     = :ios, "7.0"
   #  Specify the location from where the source should be retrieved.
   #  Supports git, hg, bzr, svn and HTTP.
   #
-s.source       = { :git => "https://github.com/Empora/JSTokenField.git",:tag => s.version.to_s}
+  s.source       = { :git => "https://github.com/Empora/JSTokenField.git",:tag => s.version.to_s}
 
 
 
@@ -90,7 +90,7 @@ s.source       = { :git => "https://github.com/Empora/JSTokenField.git",:tag => 
   #  Not including the public_header_files will make all headers public.
   #
 
-s.source_files  = "JSTokenField/JSTokenField.{h,m}","JSTokenField/JSBackspaceReportingTextField.{h,m}","JSTokenField/JSTokenButton.{h,m}","JSTokenField/JSTokenField.{h,m}”
+  s.source_files  = "JSTokenField/JSTokenField.{h,m}","JSTokenField/JSBackspaceReportingTextField.{h,m}","JSTokenField/JSTokenButton.{h,m}","JSTokenField/JSTokenField.{h,m}”
 
   # s.public_header_files = "Classes/**/*.h"
 
@@ -104,7 +104,7 @@ s.source_files  = "JSTokenField/JSTokenField.{h,m}","JSTokenField/JSBackspaceRep
   #
 
   # s.resource  = "icon.png"
-s.resources = "JSTokenField/*.png"
+  s.resources = "JSTokenField/*.png"
 
   # s.preserve_paths = "FilesToSave", "MoreFilesToSave"
 
@@ -115,7 +115,7 @@ s.resources = "JSTokenField/*.png"
   #  the lib prefix of their name.
   #
 
-s.framework  = "UIKit"
+  s.framework  = "UIKit"
 
   # s.frameworks = "SomeFramework", "AnotherFramework"
 
