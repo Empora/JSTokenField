@@ -96,6 +96,9 @@ NSString *const JSDeletedTokenKey = @"JSDeletedTokenKey";
 	CGRect frame = self.frame;
     
     self.scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
+    self.scrollView.showsHorizontalScrollIndicator = NO;
+    self.scrollView.showsVerticalScrollIndicator = NO;
+
     [self addSubview:self.scrollView];
     
 	[self setBackgroundColor:[UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.0]];
@@ -317,7 +320,6 @@ NSString *const JSDeletedTokenKey = @"JSDeletedTokenKey";
 
 - (void)layoutSubviews
 {
-    
     self.scrollView.frame = self.bounds;
 
 	CGRect currentRect = CGRectZero;
@@ -387,15 +389,18 @@ NSString *const JSDeletedTokenKey = @"JSDeletedTokenKey";
 	if ((self.frame.size.width - textFieldFrame.origin.x) >= 60)
 	{
 		textFieldFrame.size.width = self.frame.size.width - textFieldFrame.origin.x;
+        if (self.isScrollableHorizontally) {
+            self.scrollView.scrollEnabled =  NO;
+            self.scrollView.bounces = NO;
+        }
 	}
 	else
 	{
         if (self.isScrollableHorizontally) {
             self.scrollView.scrollEnabled =  YES;
-            self.scrollView.showsHorizontalScrollIndicator = YES;
+            self.scrollView.bounces = YES;
+//            self.scrollView.showsHorizontalScrollIndicator = YES;
             scrollToRect = CGRectMake(textFieldFrame.origin.x + textFieldFrame.size.width,textFieldFrame.origin.y, textFieldFrame.size.width + WIDTH_PADDING, textFieldFrame.size.height);
-//            CGPoint scrollTo = CGPointMake( textFieldFrame.origin.x + textFieldFrame.size.width + WIDTH_PADDING - self.frame.size.width, 0);
-//            self.scrollView.contentOffset = scrollTo;
         } else {
             [lastLineTokens removeAllObjects];
             textFieldFrame.size.width = self.frame.size.width;
@@ -422,14 +427,16 @@ NSString *const JSDeletedTokenKey = @"JSDeletedTokenKey";
     if (takesMultipleLines) {
         if (self.isScrollableVertically) {
             self.scrollView.scrollEnabled =  YES;
-            self.scrollView.showsVerticalScrollIndicator = YES;
+            self.scrollView.bounces = YES;
+//            self.scrollView.showsVerticalScrollIndicator = YES;
         }
     }
     else {
         if (self.isScrollableVertically) {
             self.scrollView.scrollEnabled =  NO;
+            self.scrollView.bounces = NO;
         }
-        self.scrollView.showsVerticalScrollIndicator = NO;
+//        self.scrollView.showsVerticalScrollIndicator = NO;
     }
     
     // just changed number of lines ?
