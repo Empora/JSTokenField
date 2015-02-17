@@ -47,6 +47,9 @@ extern NSString *const JSDeletedTokenKey;
 @property (nonatomic, readonly) UILabel *label;
 @property (nonatomic, assign) id <JSTokenFieldDelegate> delegate;
 
+@property (nonatomic, assign) BOOL isScrollableVertically;
+@property (nonatomic, assign) BOOL isScrollableHorizontally;
+
 - (NSArray *)allTokens;
 
 - (void)addTokenWithTitle:(NSString *)string representedObject:(id)obj;

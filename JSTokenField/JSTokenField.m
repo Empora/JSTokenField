@@ -48,7 +48,7 @@ NSString *const JSDeletedTokenKey = @"JSDeletedTokenKey";
 @property (nonatomic, readwrite) UILabel *label;
 @property (nonatomic, strong) NSMutableArray *tokens;
 @property (nonatomic, strong) NSMutableDictionary *tokenDeleteButtons;
-
+@property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) JSTokenButton *deletedToken;
 
 - (JSTokenButton *)tokenWithString:(NSString *)string representedObject:(id)obj;
@@ -94,6 +94,10 @@ NSString *const JSDeletedTokenKey = @"JSDeletedTokenKey";
 	self.insets = UIEdgeInsetsMake(HEIGHT_PADDING, WIDTH_PADDING, HEIGHT_PADDING, WIDTH_PADDING);
 	
 	CGRect frame = self.frame;
+    
+    self.scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
+    [self addSubview:self.scrollView];
+    
 	[self setBackgroundColor:[UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.0]];
 	
 	self.label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, frame.size.height)];
@@ -101,7 +105,7 @@ NSString *const JSDeletedTokenKey = @"JSDeletedTokenKey";
 	[self.label setTextColor:[UIColor colorWithRed:0.3 green:0.3 blue:0.3 alpha:1.0]];
 	[self.label setFont:[UIFont fontWithName:@"Helvetica Neue" size:17.0]];
 	
-	[self addSubview:self.label];
+	[self.scrollView addSubview:self.label];
 	
 	//		self.layer.borderColor = [[UIColor blueColor] CGColor];
 	//		self.layer.borderWidth = 1.0;
@@ -120,9 +124,11 @@ NSString *const JSDeletedTokenKey = @"JSDeletedTokenKey";
 	//		[self.textField.layer setBorderColor:[[UIColor redColor] CGColor]];
 	//		[self.textField.layer setBorderWidth:1.0];
 	
-	[self addSubview:self.textField];
+	[self.scrollView addSubview:self.textField];
 	
 	[self.textField addTarget:self action:@selector(textFieldWasUpdated:) forControlEvents:UIControlEventEditingChanged];
+    
+    self.isScrollableVertically = NO;
 }
 
 - (void) setInsets:(UIEdgeInsets)insets{
@@ -311,7 +317,11 @@ NSString *const JSDeletedTokenKey = @"JSDeletedTokenKey";
 
 - (void)layoutSubviews
 {
+    
+    self.scrollView.frame = self.bounds;
+
 	CGRect currentRect = CGRectZero;
+    BOOL takesMultipleLines = NO;
 	
 	[self.label sizeToFit];
 	[self.label setFrame:CGRectMake(self.insets.left, self.insets.top, [self.label frame].size.width, [self.label frame].size.height + self.insets.top)];
@@ -327,10 +337,15 @@ NSString *const JSDeletedTokenKey = @"JSDeletedTokenKey";
 	{
 		CGRect frame = [token frame];
 		
-		if ((currentRect.origin.x + frame.size.width) > self.frame.size.width)
+		if ((currentRect.origin.x + frame.size.width + self.insets.right + self.tokenSpacing) > self.frame.size.width)
 		{
-			[lastLineTokens removeAllObjects];
-			currentRect.origin = CGPointMake(self.insets.left, (currentRect.origin.y + frame.size.height + self.insets.top));
+            if (self.isScrollableHorizontally) {
+                
+            } else {
+                [lastLineTokens removeAllObjects];
+                currentRect.origin = CGPointMake(self.insets.left, (currentRect.origin.y + frame.size.height + self.insets.top));
+                takesMultipleLines = YES;
+            }
 		}
 		
 		frame.origin.x = currentRect.origin.x;
@@ -342,7 +357,7 @@ NSString *const JSDeletedTokenKey = @"JSDeletedTokenKey";
 		
 		if (![token superview])
 		{
-			[self addSubview:token];
+			[self.scrollView addSubview:token];
 		}
 		[lastLineTokens addObject:token];
 		
@@ -353,9 +368,10 @@ NSString *const JSDeletedTokenKey = @"JSDeletedTokenKey";
 			UIButton* tokenDeleteButton = self.tokenDeleteButtons[[token titleForState:UIControlStateNormal]];
 			if (![tokenDeleteButton superview])
 			{
-				[self addSubview:tokenDeleteButton];
+				[self.scrollView addSubview:tokenDeleteButton];
 			}
-			tokenDeleteButton.frame = CGRectMake(currentRect.origin.x, (self.bounds.size.height-tokenDeleteButtonWidth)/2.0, tokenDeleteButtonWidth, tokenDeleteButtonWidth);
+			tokenDeleteButton.frame = CGRectMake(currentRect.origin.x,
+                                                 ((self.bounds.size.height-tokenDeleteButtonWidth)/2.0)+currentRect.origin.y, tokenDeleteButtonWidth, tokenDeleteButtonWidth);
 		}
 		
 		currentRect.origin.x += tokenDeleteButtonWidth + self.tokenSpacing;
@@ -372,16 +388,26 @@ NSString *const JSDeletedTokenKey = @"JSDeletedTokenKey";
 	}
 	else
 	{
-		[lastLineTokens removeAllObjects];
-		textFieldFrame.size.width = self.frame.size.width;
-		textFieldFrame.origin = CGPointMake(WIDTH_PADDING * 2,
-											(currentRect.origin.y + currentRect.size.height + HEIGHT_PADDING));
+        if (self.isScrollableHorizontally) {
+            self.scrollView.scrollEnabled =  YES;
+            self.scrollView.showsHorizontalScrollIndicator = YES;
+//            CGRect scrollToRect = CGRectMake(textFieldFrame.origin.x + textFieldFrame.size.width,textFieldFrame.origin.y, textFieldFrame.size.width + WIDTH_PADDING, textFieldFrame.size.height);
+//            [self.scrollView scrollRectToVisible:scrollToRect animated:YES];
+            CGPoint scrollTo = CGPointMake( textFieldFrame.origin.x + textFieldFrame.size.width + WIDTH_PADDING - self.frame.size.width, 0);
+            self.scrollView.contentOffset = scrollTo;
+        } else {
+            [lastLineTokens removeAllObjects];
+            textFieldFrame.size.width = self.frame.size.width;
+            textFieldFrame.origin = CGPointMake(WIDTH_PADDING * 2,
+                                                (currentRect.origin.y + currentRect.size.height + HEIGHT_PADDING));
+        }
 	}
 	
 	textFieldFrame.origin.y += HEIGHT_PADDING;
 	[self.textField setFrame:textFieldFrame];
 	CGRect selfFrame = [self frame];
 	selfFrame.size.height = textFieldFrame.origin.y + textFieldFrame.size.height + HEIGHT_PADDING;
+    selfFrame.size.width = textFieldFrame.origin.x + textFieldFrame.size.width + WIDTH_PADDING;
 	
 	CGFloat textFieldMidY = CGRectGetMidY(textFieldFrame);
 	for (UIButton *token in lastLineTokens) {
@@ -391,16 +417,45 @@ NSString *const JSDeletedTokenKey = @"JSDeletedTokenKey";
 		token.center = tokenCenter;
 	}
 	
-	if (self.layer.presentationLayer == nil) {
-		[self setFrame:selfFrame];
-	}
-	else {
-		[UIView animateWithDuration:0.3
-						 animations:^{
-							 [self setFrame:selfFrame];
-						 }
-						 completion:nil];
-	}
+    // enable scrolling when too much for one line
+    if (takesMultipleLines) {
+        if (self.isScrollableVertically) {
+            self.scrollView.scrollEnabled =  YES;
+            self.scrollView.showsVerticalScrollIndicator = YES;
+        }
+    }
+    else {
+        if (self.isScrollableVertically) {
+            self.scrollView.scrollEnabled =  NO;
+        }
+        self.scrollView.showsVerticalScrollIndicator = NO;
+    }
+    
+    // just changed number of lines ?
+    if ((self.isScrollableVertically) && (self.scrollView.contentSize.height != selfFrame.size.height)) {
+        CGPoint scrollTo = CGPointMake( 0, selfFrame.size.height - self.bounds.size.height);
+        self.scrollView.contentOffset = scrollTo;
+    }
+
+    
+    if (self.layer.presentationLayer == nil) {
+        if (self.isScrollableVertically || self.isScrollableHorizontally) {
+            [self.scrollView setContentSize:selfFrame.size];
+        } else {
+            [self setFrame:selfFrame];
+        }
+    }
+    else {
+        [UIView animateWithDuration:0.3
+                         animations:^{
+                             if (self.isScrollableVertically || self.isScrollableHorizontally) {
+                                 [self.scrollView setContentSize:selfFrame.size];
+                             } else {
+                                 [self setFrame:selfFrame];
+                             }
+                         }
+                         completion:nil];
+    }
 }
 
 - (void)toggle:(id)sender
@@ -420,6 +475,7 @@ NSString *const JSDeletedTokenKey = @"JSDeletedTokenKey";
 	CGRect oldFrame = self.frame;
 	
 	[super setFrame:frame];
+    self.scrollView.frame = self.bounds;
 	
 	NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithObject:[NSValue valueWithCGRect:frame] forKey:JSTokenFieldNewFrameKey];
 	[userInfo setObject:[NSValue valueWithCGRect:oldFrame] forKey:JSTokenFieldOldFrameKey];
@@ -433,6 +489,7 @@ NSString *const JSDeletedTokenKey = @"JSDeletedTokenKey";
 		[[NSNotificationCenter defaultCenter] postNotificationName:JSTokenFieldFrameDidChangeNotification object:self userInfo:[userInfo copy]];
 	}
 }
+
 
 #pragma mark -
 #pragma mark UITextFieldDelegate
