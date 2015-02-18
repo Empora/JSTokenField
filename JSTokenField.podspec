@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
 
 
   s.name         = "JSTokenField"
-  s.version      = "1.2.2"
+  s.version      = "1.2.3"
   s.summary      = "Text field with tokenised keywords"
   s.description  = "Text field similar to mail email list, or search bar, where keywords or terms can be turned in to tokens which reside at the beginning of the text field"
   s.homepage     = "https://github.com/Empora/JSTokenField"

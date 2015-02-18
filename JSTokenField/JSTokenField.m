@@ -98,6 +98,7 @@ NSString *const JSDeletedTokenKey = @"JSDeletedTokenKey";
     self.scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
     self.scrollView.showsHorizontalScrollIndicator = NO;
     self.scrollView.showsVerticalScrollIndicator = NO;
+    self.scrollView.scrollsToTop = NO;
 
     [self addSubview:self.scrollView];
     
