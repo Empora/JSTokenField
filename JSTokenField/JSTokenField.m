@@ -96,10 +96,7 @@ NSString *const JSDeletedTokenKey = @"JSDeletedTokenKey";
 	CGRect frame = self.frame;
     
     self.scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
-    self.scrollView.showsHorizontalScrollIndicator = NO;
-    self.scrollView.showsVerticalScrollIndicator = NO;
-    self.scrollView.scrollsToTop = NO;
-
+//    self.scrollView.scrollEnabled = NO;
     [self addSubview:self.scrollView];
     
 	[self setBackgroundColor:[UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.0]];
@@ -321,6 +318,7 @@ NSString *const JSDeletedTokenKey = @"JSDeletedTokenKey";
 
 - (void)layoutSubviews
 {
+    
     self.scrollView.frame = self.bounds;
 
 	CGRect currentRect = CGRectZero;
@@ -368,13 +366,18 @@ NSString *const JSDeletedTokenKey = @"JSDeletedTokenKey";
 		
 		
 		if (self.showDeleteButtons) {
-			UIButton* tokenDeleteButton = self.tokenDeleteButtons[[token titleForState:UIControlStateNormal]];
-			if (![tokenDeleteButton superview])
-			{
-				[self.scrollView addSubview:tokenDeleteButton];
-			}
-			tokenDeleteButton.frame = CGRectMake(currentRect.origin.x,
-                                                 ((self.bounds.size.height-tokenDeleteButtonWidth)/2.0)+currentRect.origin.y, tokenDeleteButtonWidth, tokenDeleteButtonWidth);
+            NSString *title = [token titleForState:UIControlStateNormal];
+			UIButton* tokenDeleteButton = self.tokenDeleteButtons[title];
+            if (tokenDeleteButton) {
+                if (![tokenDeleteButton superview])
+                {
+                    [self.scrollView addSubview:tokenDeleteButton];
+                }
+                tokenDeleteButton.frame = CGRectMake(currentRect.origin.x,
+                                                     ((self.bounds.size.height-tokenDeleteButtonWidth)/2.0)+currentRect.origin.y, tokenDeleteButtonWidth, tokenDeleteButtonWidth);
+            } else {
+                NSLog(@"failed to get tokenDeleteButton from token title %@", title);
+            }
 		}
 		
 		currentRect.origin.x += tokenDeleteButtonWidth + self.tokenSpacing;
@@ -392,15 +395,13 @@ NSString *const JSDeletedTokenKey = @"JSDeletedTokenKey";
 		textFieldFrame.size.width = self.frame.size.width - textFieldFrame.origin.x;
         if (self.isScrollableHorizontally) {
             self.scrollView.scrollEnabled =  NO;
-            self.scrollView.bounces = NO;
         }
 	}
 	else
 	{
         if (self.isScrollableHorizontally) {
             self.scrollView.scrollEnabled =  YES;
-            self.scrollView.bounces = YES;
-//            self.scrollView.showsHorizontalScrollIndicator = YES;
+            self.scrollView.showsHorizontalScrollIndicator = YES;
             scrollToRect = CGRectMake(textFieldFrame.origin.x + textFieldFrame.size.width,textFieldFrame.origin.y, textFieldFrame.size.width + WIDTH_PADDING, textFieldFrame.size.height);
         } else {
             [lastLineTokens removeAllObjects];
@@ -428,16 +429,14 @@ NSString *const JSDeletedTokenKey = @"JSDeletedTokenKey";
     if (takesMultipleLines) {
         if (self.isScrollableVertically) {
             self.scrollView.scrollEnabled =  YES;
-            self.scrollView.bounces = YES;
-//            self.scrollView.showsVerticalScrollIndicator = YES;
+            self.scrollView.showsVerticalScrollIndicator = YES;
         }
     }
     else {
         if (self.isScrollableVertically) {
             self.scrollView.scrollEnabled =  NO;
-            self.scrollView.bounces = NO;
         }
-//        self.scrollView.showsVerticalScrollIndicator = NO;
+        self.scrollView.showsVerticalScrollIndicator = NO;
     }
     
     // just changed number of lines ?
