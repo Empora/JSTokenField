@@ -96,7 +96,9 @@ NSString *const JSDeletedTokenKey = @"JSDeletedTokenKey";
 	CGRect frame = self.frame;
     
     self.scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
-//    self.scrollView.scrollEnabled = NO;
+    self.scrollView.showsHorizontalScrollIndicator = NO;
+    self.scrollView.showsVerticalScrollIndicator = NO;
+
     [self addSubview:self.scrollView];
     
 	[self setBackgroundColor:[UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.0]];
@@ -401,7 +403,7 @@ NSString *const JSDeletedTokenKey = @"JSDeletedTokenKey";
 	{
         if (self.isScrollableHorizontally) {
             self.scrollView.scrollEnabled =  YES;
-            self.scrollView.showsHorizontalScrollIndicator = YES;
+//            self.scrollView.showsHorizontalScrollIndicator = YES;
             scrollToRect = CGRectMake(textFieldFrame.origin.x + textFieldFrame.size.width,textFieldFrame.origin.y, textFieldFrame.size.width + WIDTH_PADDING, textFieldFrame.size.height);
         } else {
             [lastLineTokens removeAllObjects];
