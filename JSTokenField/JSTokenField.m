@@ -396,6 +396,8 @@ NSString *const JSDeletedTokenKey = @"JSDeletedTokenKey";
 	{
 		textFieldFrame.size.width = self.frame.size.width - textFieldFrame.origin.x;
         if (self.isScrollableHorizontally) {
+            JSTokenField *firstToken = [self.tokens firstObject];
+            scrollToRect = firstToken.frame;
             self.scrollView.scrollEnabled =  NO;
         }
 	}
